@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>MVP ebook-ftd</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="css/styles.css">
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+	        	<!-- cover -->
+                <section data-background="assets/image/background-cover.png">
+					<div style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: #1E1D1C; color: #fff; padding: 20px; font-size: 20px;">
+						<h1> FTD - MVP Livro Interativo</h1>
+					</div>
+				</section>
+
+	        	<!-- page 1 -->
+				<section 
+				data-state="typed-section-page-1"
+				data-background-color="#fff"
+                data-background-video="assets/video/page_1.mp4"
+                data-background-video-loop data-background-video-muted >
+				<div style="height: 700px;  padding-top: 166px;">
+					<span id="typed-page-1"></span>
+					<div id="typed-strings-page-1">
+						<p>
+							Tinha sido difícil empurrar uma poltrona tão
+							pesada. Ela aproveitou que estava ali sem voar
+							para esticar um pouquinho braços e pernas e
+							descansar.
+						</p>
+					</div>
+				
+                    <audio data-autoplay controls autoplay hidden>
+                        <source data-src="assets/audio/page_1.mp3" type="audio/mpeg">
+                    </audio>
+				</div>
+                </section>
+
+				<!-- page 2 -->
+				<section 
+				data-state="typed-section-page-2"
+                data-background-video="assets/video/page_2.mp4"
+                data-background-video-loop data-background-video-muted >
+				<div style="height: 700px;  padding-top: 166px;">
+					<span id="typed-page-2"></span>
+					<div id="typed-strings-page-2">
+						<p>
+							Sonhou com estrelas, cometas, sóis,
+							luas e planetas habitados por seres engraçados.
+						</p>
+					</div>
+
+                    <audio data-autoplay controls autoplay hidden>
+                        <source data-src="assets/audio/page_2.mp3" type="audio/mpeg">
+                    </audio>
+				</div>
+                </section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/typed/typed.js"></script>
+		<script>
+			Reveal.initialize({autoPlayMedia: true, autoAnimate: false,
+				dependencies: [
+					{ src: 'plugin/typed/typed.js', async: false , callback: function() { callTypedJs(); }}
+				]
+			});
+
+			Reveal.addEventListener('typed-section-page-1', function (e) {
+				restartTyped(2000, 50, '-page-1');
+            });
+			Reveal.addEventListener('typed-section-page-2', function (e) {
+				restartTyped(0, 50, '-page-2');
+            });
+		</script>
+	</body>
+</html>
