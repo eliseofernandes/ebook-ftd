@@ -27,7 +27,8 @@
 				data-state="typed-section-page-1"
 				data-background-color="#fff"
                 data-background-video="assets/video/page_1.mp4"
-                data-background-video-loop data-background-video-muted >
+                data-background-video-loop data-background-video-muted
+				data-autoplay >
 				<div style="height: 700px;  padding-top: 166px;">
 					<span id="typed-page-1"></span>
 					<div id="typed-strings-page-1">
@@ -49,9 +50,11 @@
 				<section 
 				data-state="typed-section-page-2"
                 data-background-video="assets/video/page_2.mp4"
-                data-background-video-loop data-background-video-muted >
+                data-background-video-loop data-background-video-muted
+				data-autoplay >
 				<div style="height: 700px;  padding-top: 166px;">
-					<span id="typed-page-2"></span>
+					<span id="typed-page-2" style="position: fixed; width: 100%;
+					left: 0;"></span>
 					<div id="typed-strings-page-2">
 						<p>
 							Sonhou com estrelas, cometas, sóis,
@@ -62,6 +65,51 @@
                     <audio data-autoplay controls autoplay hidden>
                         <source data-src="assets/audio/page_2.mp3" type="audio/mpeg">
                     </audio>
+
+					<video width="894" height="872" style="height: 396px;
+						top: 0;
+						right: -386px;
+						width: 605px;
+						position: absolute;
+						z-index: -1;"
+						id="disco"
+						onclick="clickVideo('disco');"
+						class="video-int">
+						<source data-src="assets/video/disco_page_2.mp4" type="video/mp4">
+					</video>
+					<video width="894" height="872" style="height: 476px;
+						top: 403px;
+						right: -360px;
+						width: 481px;
+						position: absolute;
+						z-index: -1;"
+						id="papagaio"
+						onclick="clickVideo('papagaio');"
+						class="video-int">
+						<source data-src="assets/video/papagaio_page_2.mp4" type="video/mp4">
+					</video>
+					<video width="894" height="872" style="height: 655px;
+						top: 264px;
+						left: -277px;
+						width: 598px;
+						position: absolute;
+						z-index: 0;"
+						id="foguete"
+						onclick="clickVideo('foguete');"
+						class="video-int">
+						<source data-src="assets/video/foguete_page_2.mp4" type="video/mp4">
+					</video>
+					<video width="894" height="872" style="height: 655px;
+						top: 402px;
+						left: 307px;
+						width: 598px;
+						position: absolute;
+						z-index: 0;"
+						id="fadinha01_page_2"
+						onclick="clickVideo('fadinha01_page_2');"
+						class="video-int">
+						<source data-src="assets/video/fadinha01_page_2.mp4" type="video/mp4">
+					</video>
 				</div>
                 </section>
 			</div>
@@ -70,7 +118,8 @@
 		<script src="dist/reveal.js"></script>
 		<script src="dist/plugin/typed/typed.js"></script>
 		<script>
-			Reveal.initialize({autoPlayMedia: true, autoAnimate: false,
+			Reveal.initialize({autoAnimate: false,
+				transition: 'none', autoPlayMedia: true, autoAnimateEasing: null
 			});
 
 			Reveal.addEventListener('typed-section-page-1', function (e) {
@@ -80,7 +129,32 @@
 			Reveal.addEventListener('typed-section-page-2', function (e) {
 				document.getElementById("typed-page-2").innerHTML = ""
 				restartTyped(0, 50, '-page-2');
+				pauseVideo('disco');
             });
+
+			Reveal.on( 'slidetransitionend', event => {
+				// var delayInMilliseconds = 1000; //1 second
+
+				// setTimeout(function() {
+				// 	document.querySelectorAll('.video-int').forEach(vid => vid.pause());
+				// }, delayInMilliseconds);
+			} );
+
+			function clickVideo(videoId) { 
+				var video = document.getElementById(videoId);
+					if (video.paused == true) {
+						video.play();
+					}
+					else{
+						video.pause();
+					}
+			}
+
+			function pauseVideo(vid) { 
+					if (vid.paused !== true) {
+						vid.pause();
+					}
+			}
 		</script>
 	</body>
 </html>
