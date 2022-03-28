@@ -16,7 +16,7 @@
 		<div class="reveal">
 			<div class="slides">
 	        	<!-- cover -->
-                <section data-background="assets/image/background-cover.png">
+                <section data-preload data-background="assets/image/background-cover.png">
 					<div style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: #1E1D1C; color: #fff; padding: 20px; font-size: 20px;">
 						<h1> FTD - MVP Livro Interativo</h1>
 					</div>
@@ -71,15 +71,14 @@
 		<script src="dist/plugin/typed/typed.js"></script>
 		<script>
 			Reveal.initialize({autoPlayMedia: true, autoAnimate: false,
-				dependencies: [
-					{ src: 'plugin/typed/typed.js', async: false , callback: function() { callTypedJs(); }}
-				]
 			});
 
 			Reveal.addEventListener('typed-section-page-1', function (e) {
+				document.getElementById("typed-page-1").innerHTML = ""
 				restartTyped(2000, 50, '-page-1');
             });
 			Reveal.addEventListener('typed-section-page-2', function (e) {
+				document.getElementById("typed-page-2").innerHTML = ""
 				restartTyped(0, 50, '-page-2');
             });
 		</script>
