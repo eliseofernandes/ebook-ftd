@@ -11,14 +11,48 @@
 		<link rel="stylesheet" href="dist/theme/black.css">
 		<link rel="stylesheet" href="css/styles.css">
 
+		<style>
+			.background {
+				position: absolute;
+				z-index: 1;
+				width: 1920px;
+				height: 1080px;
+				top: 0;
+				left: 0;
+			}
+			.element {
+				position: absolute;
+				z-index: 2;
+			}
+			.element-click {
+				cursor: pointer;
+			}
+			.element-click-hidden {
+				cursor: pointer;
+				display: none;
+			}
+		</style>
+
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 	        	<!-- cover -->
-                <section data-preload data-background="assets/image/background-cover.png">
-					<div style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: #1E1D1C; color: #fff; padding: 20px; font-size: 20px;">
-						<h1> FTD - MVP Livro Interativo</h1>
+                <section data-preload>
+					<div class="background">
+						<video width="1920" height="1080" autoplay muted id="video_capa">
+							<source data-src="assets/video/CAPA_foguete.mp4" type="video/mp4">
+						</video>
+					</div>
+					<div style=" 
+						height: 939px;
+						top: 113px;
+						width: 450px;
+						left: 739px;"
+						id="mask_capa"
+						class="element-click-hidden element"
+						onclick="clickNext();"
+					>
 					</div>
 				</section>
 
@@ -26,10 +60,16 @@
 				<section 
 				data-state="typed-section-page-1"
 				data-background-color="#fff"
-                data-background-video="assets/video/page_1.mp4"
-                data-background-video-loop data-background-video-muted
-				data-autoplay >
-				<div style="height: 700px;  padding-top: 166px;">
+				>
+				<div class="background">
+					<img width="1920" height="1080" data-src="assets/image/fundo_branco.png">
+				</div>
+				<div class="element" style="
+					height: 700px;
+					top: 166px;
+					width: 745px;
+					left: 505px;"
+				>
 					<span id="typed-page-1"></span>
 					<div id="typed-strings-page-1">
 						<p>
@@ -40,7 +80,7 @@
 						</p>
 					</div>
 				
-                    <audio data-autoplay controls autoplay hidden>
+                    <audio data-autoplay autoplay data-ignore>
                         <source data-src="assets/audio/page_1.mp3" type="audio/mpeg">
                     </audio>
 				</div>
@@ -48,11 +88,9 @@
 
 				<!-- page 2 -->
 				<section 
-				data-state="typed-section-page-2"
-                data-background-video="assets/video/page_2.mp4"
-                data-background-video-loop data-background-video-muted
-				data-autoplay >
-				<div style="height: 700px;  padding-top: 166px;">
+				data-state="typed-section-page-2" >
+				<div style="height: 1080px; width: 1920px;">
+					<div  style="padding-top: 166px;">
 					<span id="typed-page-2" style="position: fixed; width: 100%;
 					left: 0;"></span>
 					<div id="typed-strings-page-2">
@@ -61,6 +99,9 @@
 							luas e planetas habitados por seres engraçados.
 						</p>
 					</div>
+				</div>
+
+					<div class="sl-block-content" style="z-index: 10;"><img data-natural-width="1920" data-natural-height="1080" data-src="assets/image/fundo_preto.png"></div>
 
                     <audio data-autoplay controls autoplay hidden>
                         <source data-src="assets/audio/page_2.mp3" type="audio/mpeg">
@@ -119,7 +160,9 @@
 		<script src="dist/plugin/typed/typed.js"></script>
 		<script>
 			Reveal.initialize({autoAnimate: false,
-				transition: 'none', autoPlayMedia: true, autoAnimateEasing: null
+				transition: 'none',
+				//  autoPlayMedia: false, 
+				 autoAnimateEasing: null,  width: 1920, height: 1080, margin: 0, center: false
 			});
 
 			Reveal.addEventListener('typed-section-page-1', function (e) {
@@ -127,12 +170,14 @@
 				restartTyped(2000, 50, '-page-1');
             });
 			Reveal.addEventListener('typed-section-page-2', function (e) {
-				document.getElementById("typed-page-2").innerHTML = ""
-				restartTyped(0, 50, '-page-2');
-				pauseVideo('disco');
+				// document.getElementById("typed-page-2").innerHTML = ""
+				// restartTyped(0, 50, '-page-2');
+				// pauseVideo('disco');
             });
 
-			Reveal.on( 'slidetransitionend', event => {
+			Reveal.on('slidechanged', event => {
+
+				console.log(event)
 				// var delayInMilliseconds = 1000; //1 second
 
 				// setTimeout(function() {
@@ -141,20 +186,30 @@
 			} );
 
 			function clickVideo(videoId) { 
-				var video = document.getElementById(videoId);
-					if (video.paused == true) {
-						video.play();
-					}
-					else{
-						video.pause();
-					}
+				// var video = document.getElementById(videoId);
+				// 	if (video.paused == true) {
+				// 		video.play();
+				// 	}
+				// 	else{
+				// 		video.pause();
+				// 	}
 			}
 
 			function pauseVideo(vid) { 
-					if (vid.paused !== true) {
-						vid.pause();
-					}
+					// if (vid.paused !== true) {
+					// 	vid.pause();
+					// }
 			}
+
+			function clickNext() {
+				Reveal.next();
+			}
+
+			var video_capa = document.getElementById("video_capa");
+			video_capa.onended = function() {
+				var mask_capa = document.getElementById("mask_capa");
+				mask_capa.style.display = "block";
+			};
 		</script>
 	</body>
 </html>
